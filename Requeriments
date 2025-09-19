@@ -1,0 +1,70 @@
+Requirement Specification: StringCalculator
+1. Purpose
+The purpose of this specification is to define the requirements for a StringCalculator class that provides an Add method. This method takes a string input containing numbers separated by delimiters and returns their sum, following specific parsing rules.
+
+2. Functional Requirements
+2.1 Basic Input Handling
+
+The Add method shall accept a string input containing up to two numbers separated by commas.
+If the input string is empty (""), the method shall return 0.
+If the input contains a single number (e.g., "1"), the method shall return that number.
+If the input contains two numbers separated by a comma (e.g., "1,2"), the method shall return their sum.
+
+2.2 Variable Number of Inputs
+
+The method shall support an unknown number of numbers separated by commas.
+
+2.3 Newline Delimiters
+
+The method shall support newline characters (\n) as valid delimiters in addition to commas.
+Example: "1\n2,3" shall return 6.
+Invalid input such as "1,\n" is not supported and should be considered malformed (no need to handle explicitly).
+
+2.4 Custom Delimiters
+
+The method shall support custom single-character or multi-character delimiters.
+Custom delimiters are defined at the beginning of the string in the format: "//[delimiter]\n[numbers…]".
+
+Example: "//;\n1;2" shall return 3.
+Example: "//[***]\n1***2***3" shall return 6.
+
+
+The delimiter declaration line is optional. If not present, default delimiters (comma and newline) are used.
+
+2.5 Negative Number Handling
+
+If the input contains one or more negative numbers, the method shall throw an exception.
+The exception message shall be: "negatives not allowed" followed by a list of all negative numbers found.
+
+Example: "Add("-1,2,-3")" shall throw: "negatives not allowed: -1, -3".
+
+
+
+2.6 Ignoring Large Numbers
+
+Numbers greater than 1000 shall be ignored in the sum.
+
+Example: "2,1001" shall return 2.
+
+
+
+
+3. Non-Functional Requirements
+
+The method shall be efficient and handle large inputs gracefully.
+The implementation shall be readable and maintainable.
+The method shall be unit-testable with clear test cases for each scenario.
+
+
+4. Constraints
+
+Input must be a string.
+Delimiters must be properly formatted if custom delimiters are used.
+Negative numbers must trigger an exception.
+
+
+5. Assumptions
+
+Input strings are well-formed unless specified otherwise.
+Only integers are expected in the input string.
+Delimiters will not contain digits.
